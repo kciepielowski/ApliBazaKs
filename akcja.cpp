@@ -1,11 +1,12 @@
-#include "akcja.h"
+﻿#include "akcja.h"
 #include "sharedtypes.h"
 #include <QMessageBox>
 
-void Akcja::on_tablica_click(int clickedRow,int clickedColumn)
+void Akcja::on_tablica_click(int clickedRow, int clickedColumn)
 {
+QTableWidget* snd=qobject_cast<QTableWidget*>(sender());
     paramText=tablica[id].parametr;
-    param2Text=tablice[id]->item(clickedRow,clickedColumn)->text();
+    param2Text=snd->item(clickedRow,clickedColumn)->text();
     wynik=tablica[id].wynik;
     if(tablica[id].fn==SQL)
     {
@@ -17,6 +18,7 @@ void Akcja::on_przycisk_click(int id)
 {
     paramText=przyciski[id].parametr;
     wynik=przyciski[id].wynik;
+    QMessageBox msgBox;
     switch (przyciski[id].fn)
     {
     case ZAMKNIJ:
@@ -32,6 +34,9 @@ void Akcja::on_przycisk_click(int id)
         policz();
         break;
        default:
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setText(tr("Nie obsłużona funkcja."));
+        msgBox.exec();
         break;
     }
 }
@@ -44,16 +49,23 @@ void Akcja::zamknij()
 void Akcja::wywolaj()
 {
     int result;
+    QString loginfo=" ";
     QMessageBox msgBox;
+    if(paramText.toLower().contains(".xml"))
+    {
+        if(!baza.User.isEmpty())loginfo+=baza.User;
+        if(!baza.Password.isEmpty())loginfo+=" "+baza.Password;
+        if(loginfo==" ")loginfo="";
 #ifdef Q_WS_X11
-        result=system("./ApliBazaKs "+paramText.toAscii());
+        result=system(programName.toAscii()+" "+paramText.toAscii()+loginfo.toAscii());
 #endif
 #ifdef Q_WS_WIN
-        result=system("ApliBazaKs "+paramText.toAscii());
+        result=system(programName.toAscii()+" "+paramText.toAscii()+loginfo.toAscii());
 #endif
+    }else result=system(paramText.toAscii());
         if(result!=0){
              msgBox.setIcon(QMessageBox::Warning);
-             msgBox.setText("Zmieniona nazwa pliku?");
+             msgBox.setText(tr("Błąd funkcji wywołaj."));
              msgBox.exec();
         }
 

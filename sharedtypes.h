@@ -1,6 +1,5 @@
 #ifndef SHAREDTYPES
 #define SHAREDTYPES
-#include "QObject"
 #include "QStringList"
 #include "baza.h"
 #include "akcja.h"
@@ -10,8 +9,10 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QTableWidget>
 #include <QtScript/QScriptEngine>
+#include <QObject>
 
 extern bool akt_wiersz, akt_tablica;
+extern QString programName;
 extern QTableWidgetItem *itemPointer;
 extern QLineEdit **polaTekstowe;
 extern QLabel **pola;

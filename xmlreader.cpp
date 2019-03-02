@@ -10,18 +10,18 @@ bool XMLReader::isNameEqual(QString str)
 }
 bool XMLReader::isFunkcjaEqual(QString str)
 {
-   return (QXmlStreamReader::attributes().value("funkcja").toString()==str);
+   return (QXmlStreamReader::attributes().value(QObject::tr("funkcja")).toString()==str);
 }
 Elementy XMLReader::readTypeOfElement()
 {
-    if(isNameEqual("tytul"))return TYTUL;
-    else if(isNameEqual("okno"))return OKNO;
-    else if(isNameEqual("tekst"))return TEKST;
-    else if(isNameEqual("poletekst"))return POLETEKST;
-    else if(isNameEqual("przycisk"))return PRZYCISK;
-    else if(isNameEqual("tablica"))return TABLICA;
-    else if(isNameEqual("wr"))return WR;
-    else if(isNameEqual("pole"))return POLE;
+    if(isNameEqual(QObject::tr("tytul")))return TYTUL;
+    else if(isNameEqual(QObject::tr("okno")))return OKNO;
+    else if(isNameEqual(QObject::tr("tekst")))return TEKST;
+    else if(isNameEqual(QObject::tr("poletekst")))return POLETEKST;
+    else if(isNameEqual(QObject::tr("przycisk")))return PRZYCISK;
+    else if(isNameEqual(QObject::tr("tablica")))return TABLICA;
+    else if(isNameEqual(QObject::tr("wr")))return WR;
+    else if(isNameEqual(QObject::tr("pole")))return POLE;
     return PUSTE;
 }
 
@@ -36,23 +36,23 @@ int8_t XMLReader::getIntAttribute(QString str)
 }
 void XMLReader::readConstPart(Obiekt* ob)
 {
-    ob->wiersz=getIntAttribute("wiersz");
-    ob->kolumna=getIntAttribute("kolumna");
-    if(!attributes().value("pwiersz").isEmpty())
-        ob->pwiersz=getIntAttribute("pwiersz");
-    if(!attributes().value("pkolumna").isEmpty())
-        ob->pkolumna=getIntAttribute("pkolumna");
-    ob->ident=getStringAttribute("id");
+    ob->wiersz=getIntAttribute(QObject::tr("wiersz"));
+    ob->kolumna=getIntAttribute(QObject::tr("kolumna"));
+    if(!attributes().value(QObject::tr("pwiersz")).isEmpty())
+        ob->pwiersz=getIntAttribute(QObject::tr("pwiersz"));
+    if(!attributes().value(QObject::tr("pkolumna")).isEmpty())
+        ob->pkolumna=getIntAttribute(QObject::tr("pkolumna"));
+    ob->ident=getStringAttribute(QObject::tr("id"));
     ob->tablica=99;
 }
 void XMLReader::readFunkcja(Przycisk* ob)
 {
-    if(isFunkcjaEqual("zamknij"))ob->fn=ZAMKNIJ;
-    else if(isFunkcjaEqual("policz"))ob->fn=POLICZ;
-    else if(isFunkcjaEqual("wywolaj"))ob->fn=WYWOLAJ;
-    else if(isFunkcjaEqual("sql"))ob->fn=SQL;
-    ob->parametr=getStringAttribute("param");
-    ob->wynik=getStringAttribute("wynik");
+    if(isFunkcjaEqual(QObject::tr("zamknij")))ob->fn=ZAMKNIJ;
+    else if(isFunkcjaEqual(QObject::tr("policz")))ob->fn=POLICZ;
+    else if(isFunkcjaEqual(QObject::tr("wywolaj")))ob->fn=WYWOLAJ;
+    else if(isFunkcjaEqual(QObject::tr("sql")))ob->fn=SQL;
+    ob->parametr=getStringAttribute(QObject::tr("param"));
+    ob->wynik=getStringAttribute(QObject::tr("wynik"));
 }
 
 void XMLReader::readObiekt(Obiekt* ob){

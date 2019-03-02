@@ -2,6 +2,7 @@
 #define XMLREADER_H
 #include <QXmlStreamReader>
 #include <QFile>
+#include <QObject>
 #include "sharedtypes.h"
 
 class XMLReader: public QXmlStreamReader
@@ -23,16 +24,6 @@ public:
     void readObiekt(Obiekt* ob);
     void readPrzycisk(Przycisk* ob);
     void readTablica(Tablice* ob);
-
-    /*
-      if(akt_tablica){
-                    tekst[objectCounter.tekst].tablica=objectCounter.tablica-1;
-                    tekst[objectCounter.tekst].wiersz=tablica[objectCounter.tablica-1].wiersze-1;
-                    tekst[objectCounter.tekst].kolumna=elem;
-                }
-                ++objectCounter.tekst;
-                if(akt_wiersz)++elem;
-     */
 
 };
 #endif // XMLREADER_H

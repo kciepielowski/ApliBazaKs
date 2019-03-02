@@ -23,8 +23,8 @@ void MainWindow::Odczytaj_XML(const QString &fileName) {
                 tytul = reader.readElementText();
              break;
              case OKNO:
-                wysokosc=reader.getStringAttribute("w");
-                szerokosc=reader.getStringAttribute("s");
+                wysokosc=reader.getStringAttribute(tr("w"));
+                szerokosc=reader.getStringAttribute(tr("s"));
              break;
              case TEKST:
                 reader.readObiekt(&tekst[objectCounter.tekst]);
@@ -56,11 +56,11 @@ void MainWindow::Odczytaj_XML(const QString &fileName) {
         }
         if (reader.isEndElement())
         {
-         if(reader.isNameEqual("tablica"))
+         if(reader.isNameEqual(tr("tablica")))
          {
              akt_tablica=false;
          }
-         if(reader.isNameEqual("wr"))
+         if(reader.isNameEqual(tr("wr")))
          {
            akt_wiersz=false;
            if(tablica[objectCounter.tablica-1].kolumny<reader.elem)tablica[objectCounter.tablica-1].kolumny=reader.elem;
@@ -114,9 +114,13 @@ MainWindow::MainWindow(QWidget *parent,QString plik) :
     Odczytaj_XMLBaza("baza.xml");
     if(baza.Typ!="QSQLITE" && baza.Typ!="QSQLITE2")
     {
+        loginDialog.Login=baza.User;
+    if(baza.Password=="")
+    {
     loginDialog.exec();
     baza.User=loginDialog.Login;
     baza.Password=loginDialog.Haslo;
+    }
     }
     createConnection(baza);
  this->resize(szerokosc.toInt(),wysokosc.toInt());

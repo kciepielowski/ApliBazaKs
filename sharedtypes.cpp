@@ -1,5 +1,6 @@
 #include "sharedtypes.h"
 bool akt_wiersz, akt_tablica;
+QString programName;
 IloscObiektow objectCounter;
 Obiekt tekst[15], poleTekst[15], pole[15];
 Tablice tablica[5];

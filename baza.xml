@@ -1,0 +1,4 @@
+<Baza>
+<Typ>QSQLITE</Typ><!--Możliwe sterowniki: QSQLITE QMYSQL3 QMYSQL QODBC3 QODBC QPSQL7 QPSQL QTDS7 QTDS-->
+<Nazwa>test.sqlite</Nazwa>
+</Baza>
